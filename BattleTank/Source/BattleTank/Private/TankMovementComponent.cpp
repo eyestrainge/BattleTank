@@ -15,10 +15,13 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
 
 	auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);
-
 	IntendMoveForward(ForwardThrow);
-
 	UE_LOG(LogTemp, Warning, TEXT("Called IntendMoveForward(float) with %f"), ForwardThrow)
+
+	auto RightThrow = FVector::CrossProduct(AIForwardIntention, TankForward);
+	auto RightThrowZ = RightThrow.Z;
+	IntendMoveRight(RightThrowZ);
+	UE_LOG(LogTemp, Warning, TEXT("Called IntendMoveRight(float) with %f"), RightThrowZ)
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw)
