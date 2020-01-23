@@ -29,7 +29,7 @@ void UTankTrack::ApplySidewaysForce()
 	if (TankRoot)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("TankRoot found @ TickComponent"))
-			auto CorrectionForce = (TankRoot->GetMass() * CorrectionAcceleration) / 2; // Two tracks
+		auto CorrectionForce = (TankRoot->GetMass() * CorrectionAcceleration) / 2; // Two tracks
 		TankRoot->AddForce(CorrectionForce);
 	}
 }
