@@ -7,18 +7,23 @@ ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-
-	/*auto TankName = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s DONKEY: Tank C++ Construct"), *TankName)*/
-
-	//TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
 }
 
-// Called when the game starts or when spawned
-//void ATank::BeginPlay()
-//{
-//	Super::BeginPlay(); // Needed for BP Begin Play to run!
-//
-//	auto TankName = GetName();
-//	UE_LOG(LogTemp, Warning, TEXT("%s DONKEY: Tank C++ BeginPlay"), *TankName)
-//}
+float ATank::TakeDamage(
+	float DamageAmount,
+	FDamageEvent const& DamageEvent,
+	AController* EventInstigator,
+	AActor* DamageCauser
+)
+{
+	int32 DamagePoints = FPlatformMath::RoundToInt(DamageAmount);
+	int32 DamageToApply = FMath::Clamp(DamagePoints, 0, CurrentHealth);
+
+	UE_LOG(LogTemp, Warning, TEXT("DamageAmount = %f, DamageToApply = %i"), DamageAmount, DamageToApply)
+
+	CurrentHealth -= DamageToApply;
+	if (CurrentHealth <= 0)
+		UE_LOG(LogTemp, Warning, TEXT("Tank destroyed"))
+
+	return DamageToApply;
+}
