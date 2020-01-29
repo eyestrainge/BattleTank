@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "TankAimingComponent.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
 #include "Projectile.h"
-#include "TankAimingComponent.h"
 #include "Engine.h"
 
 // Sets default values for this component's properties
